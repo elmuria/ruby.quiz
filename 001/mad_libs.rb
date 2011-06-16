@@ -8,16 +8,9 @@ template = File.open(ARGV.shift || usage).read
 
 while template =~ /\(\((.*?)\)\)/ do
   original = $1
-  tmp = original.split(':')
-  var = nil
-  req = tmp[0]
+  req, var = original.split(':').reverse
 
-  if tmp.length > 1
-    var = tmp[0]
-    req = tmp[1]
-  end
-
-  print "#{req}: "
+  print "Give me #{req}: "
   sub = ARGF.readline.strip
 
   template.gsub!("((#{original}))", "#{sub}")
